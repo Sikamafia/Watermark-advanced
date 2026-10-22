@@ -23,7 +23,13 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - uses: android-actions/setup-android@v3
+            - uses: android-actions/setup-android@v3
+        with:
+          accept-android-sdk-licenses: false
+          packages: ''
+
+      - name: Accept Android licenses
+        run: yes | sdkmanager --licenses > /dev/null || true
 
       - name: Install NDK and build tools
         run: sdkmanager "ndk;${NDK_VERSION}" "platforms;android-35" "build-tools;${BUILD_TOOLS}"
